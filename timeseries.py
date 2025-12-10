@@ -9,9 +9,9 @@ g = .1
 kappa = 0.04
 gamma_a = 0.012
 gamma_d = 1.
-# pp = 10.
 # pp = .6
-pp = .6
+# pp = .01
+pp = 10.
 alpha = 0
 
 # resulting rates
@@ -32,12 +32,7 @@ if pp == .6:
     bin_size = 2.
     tmin = 5e+3
     tmax = 5e+3 + 20
-    twin = bin_size * 100
-    
-    # bin_size = 50
-    # tmin = 5e+4
-    # tmax = 5e+4 + 20
-    # twin = bin_size * 50
+    twin = bin_size * 20
 
 
 if pp == .01:
@@ -51,11 +46,6 @@ if pp == 10.:
     tmin = 5e+4
     tmax = 5e+4 + 20
     twin = bin_size * 50
-    
-    # bin_size = 2.
-    # tmin = 5e+3
-    # tmax = 5e+3 + 20
-    # twin = bin_size * 20
 
 # bin outcoupled photons
 t_binned, a_binned = laser.bin_laser_timeseries(t_array, na_out_array, bin_size)
@@ -70,7 +60,6 @@ ax[0,0].plot(t_array-tmin, na_out_array)
 ax[0,1].plot(t_array-tmin, na_in_array)
 ax[1,0].plot(t_array-tmin, ne_array)
 ax[1,1].plot(t_binned-tmin, a_binned)
-print()
 
 ax[0,0].set_xlabel(r'$t$ [ps]')
 ax[0,0].set_ylabel(r'$n_\mathrm{out}(t)$')
@@ -91,5 +80,5 @@ ax[1,1].set_xlim((0, twin))
 
 fig.suptitle(r'$p={:.2f}$\,ps$^{{-1}}$, $g^{{(2)}}(0) = {:.2f}$'.format(pp, g2))
 fig.show()
-# fig.savefig('plots/timeseries_p_{}.pdf'.format(pp))
+fig.savefig('plots/timeseries_p_{}.pdf'.format(pp))
 
